@@ -18,6 +18,7 @@ namespace string_test
             var sw = new Stopwatch();
             var rnd = new Random();
 
+            // Generate random array of text (could be replaced to read from already generated file)
             var arr = new string[numberOfStrings];
             Console.WriteLine($"Generating array of {numberOfStrings} random strings and putting them into one array");
             sw.Start();
@@ -28,6 +29,7 @@ namespace string_test
             Console.WriteLine($"... Done! Took {sw.ElapsedMilliseconds}ms");
             Console.WriteLine();
 
+            // Write array to file for later use and comparison
             using (var f = File.OpenWrite("arr.txt"))
             {
                 var writer = new StreamWriter(f);
@@ -38,16 +40,20 @@ namespace string_test
                 }
             }
 
+            // For debugging and testing, print first lines
             PrintFirstLines(arr, showFirstNLines);
 
+            // Sort array of random text
             Console.WriteLine($"Sorting array of {numberOfStrings} random strings");
             sw.Restart();
             Array.Sort(arr);
             Console.WriteLine($"... Done! Took {sw.ElapsedMilliseconds}ms");
             Console.WriteLine();
 
+            // Print first lines again to show that array has been sorted
             PrintFirstLines(arr, showFirstNLines);
 
+            // Test combining lines into one huge big string
             var sb = new StringBuilder();
             Console.WriteLine($"Combining {numberOfStrings} strings into one");
             sw.Restart();
@@ -59,6 +65,7 @@ namespace string_test
             Console.WriteLine($"... Done! Took {sw.ElapsedMilliseconds}ms");
             Console.WriteLine();
 
+            // Print the combined string to see that it worked
             Console.WriteLine($"Showing first {charactersToShow} characters of combined string");
             Console.WriteLine(str.Substring(0, charactersToShow));
 
